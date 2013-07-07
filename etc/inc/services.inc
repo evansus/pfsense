@@ -536,8 +536,11 @@ EOPP;
 			$revsubnet = explode(".", $subnet);
 			$revsubnet = array_reverse($revsubnet);
 			
-			# Remove the last octet of the subnet by shifting the first array item from revsubnet
-			array_shift($revsubnet);
+			if( $revsubnet[0] == "0" ) {
+				# Remove the last octet of the subnet if it is 0
+				array_shift($revsubnet);
+			}
+
 			$newzone['ptr-domain'] = implode(".", $revsubnet) . ".in-addr.arpa";
 		}
 
